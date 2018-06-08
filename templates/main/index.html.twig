@@ -3,5 +3,18 @@
 {% block title %}Main page{% endblock %}
 
 {% block body %}
-    <h1>Main page</h1>
+    <h3>options</h3>
+
+    <p>
+        <a href="{{ path('quiz_index') }}">quiz</a>
+    </p>
+
+    <p>
+        <a href="{{ path('question_index') }}">question</a>
+    </p>
+
+    <p>
+        <a href="{{ path('answer_index') }}">answer</a>
+    </p>
+
 {% endblock %}
