@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Quiz;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class QuizFixtures extends Fixture
+class QuizFixtures extends Fixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -18,5 +19,15 @@ class QuizFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    /**
+     * Get the order of this fixture
+     *
+     * @return integer
+     */
+    public function getOrder(): int
+    {
+        return 1;
     }
 }
