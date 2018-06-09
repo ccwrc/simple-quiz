@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
+use App\Entity\Question;
 use App\Form\AnswerType;
 use App\Repository\AnswerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,7 +21,9 @@ class AnswerController extends Controller
      */
     public function index(AnswerRepository $answerRepository): Response
     {
-        return $this->render('answer/index.html.twig', ['answers' => $answerRepository->findAll()]);
+        return $this->render('answer/index.html.twig', [
+            'answers' => $answerRepository->findAll()
+        ]);
     }
 
     /**
@@ -41,7 +44,31 @@ class AnswerController extends Controller
         }
 
         return $this->render('answer/new.html.twig', [
-            'answer' => $answer,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/new/{id}", name="answer_new_to_question", methods="GET|POST")
+     */
+    public function newToQuestion(Request $request, Question $question): Response
+    {
+        $answer = new Answer();
+        $answer->setQuestion($question);
+        $form = $this->createForm(AnswerType::class, $answer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($answer);
+            $em->flush();
+
+            return $this->redirectToRoute('question_show', [
+                'id' => $question->getId(),
+            ]);
+        }
+
+        return $this->render('answer/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +78,9 @@ class AnswerController extends Controller
      */
     public function show(Answer $answer): Response
     {
-        return $this->render('answer/show.html.twig', ['answer' => $answer]);
+        return $this->render('answer/show.html.twig', [
+            'answer' => $answer
+        ]);
     }
 
     /**
