@@ -21,8 +21,8 @@
                 <td>{{ quiz.title }}</td>
                 <td>{{ quiz.percentageCorrectnessToWin }}</td>
                 <td>
-                    <a href="{{ path('quiz_show', {'id': quiz.id}) }}">show</a>
-                    <a href="{{ path('quiz_edit', {'id': quiz.id}) }}">edit</a>
+                    <a href="{{ path('quiz_show', {'id': quiz.id}) }}" class="btn btn-outline-secondary btn-sm">show</a>
+                    <a href="{{ path('quiz_edit', {'id': quiz.id}) }}" class="btn btn-outline-secondary btn-sm">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('quiz_new') }}">Create new</a>
+    <a href="{{ path('quiz_new') }}" class="btn btn-outline-primary">Create new</a>
 {% endblock %}

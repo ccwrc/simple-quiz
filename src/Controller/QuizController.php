@@ -20,7 +20,9 @@ class QuizController extends Controller
      */
     public function index(QuizRepository $quizRepository): Response
     {
-        return $this->render('quiz/index.html.twig', ['quizzes' => $quizRepository->findAll()]);
+        return $this->render('quiz/index.html.twig', [
+            'quizzes' => $quizRepository->findAll()
+        ]);
     }
 
     /**
@@ -41,7 +43,6 @@ class QuizController extends Controller
         }
 
         return $this->render('quiz/new.html.twig', [
-            'quiz' => $quiz,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +52,9 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz): Response
     {
-        return $this->render('quiz/show.html.twig', ['quiz' => $quiz]);
+        return $this->render('quiz/show.html.twig', [
+            'quiz' => $quiz,
+        ]);
     }
 
     /**
