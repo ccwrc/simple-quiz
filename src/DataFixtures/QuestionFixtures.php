@@ -15,7 +15,7 @@ class QuestionFixtures extends Fixture implements OrderedFixtureInterface
         for ($i = 1; $i < 100; $i++) {
             $question = new Question();
             $question->setContent('question' . $i);
-            $quiz = $manager->find(Quiz::class, \mt_rand(2,9));
+            $quiz = $manager->find(Quiz::class, \mt_rand(2, 9));
             $question->setQuiz($quiz);
             $manager->persist($question);
         }

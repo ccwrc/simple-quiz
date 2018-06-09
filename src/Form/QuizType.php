@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Quiz;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,9 @@ class QuizType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('percentageCorrectnessToWin')
+            ->add('percentageCorrectnessToWin', NumberType::class, [
+                'label' => 'Percentage correctness to win'
+            ])
         ;
     }
 
