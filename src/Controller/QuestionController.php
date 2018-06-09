@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Question;
+use App\Entity\Quiz;
 use App\Form\QuestionType;
 use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,7 +21,9 @@ class QuestionController extends Controller
      */
     public function index(QuestionRepository $questionRepository): Response
     {
-        return $this->render('question/index.html.twig', ['questions' => $questionRepository->findAll()]);
+        return $this->render('question/index.html.twig', [
+            'questions' => $questionRepository->findAll(),
+        ]);
     }
 
     /**
@@ -41,7 +44,31 @@ class QuestionController extends Controller
         }
 
         return $this->render('question/new.html.twig', [
-            'question' => $question,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/new/{id}", name="question_new_to_quiz", methods="GET|POST")
+     */
+    public function newToQuiz(Request $request, Quiz $quiz): Response
+    {
+        $question = new Question();
+        $question->setQuiz($quiz);
+        $form = $this->createForm(QuestionType::class, $question);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($question);
+            $em->flush();
+
+            return $this->redirectToRoute('quiz_show', [
+                'id' => $quiz->getId()
+            ]);
+        }
+
+        return $this->render('question/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +78,9 @@ class QuestionController extends Controller
      */
     public function show(Question $question): Response
     {
-        return $this->render('question/show.html.twig', ['question' => $question]);
+        return $this->render('question/show.html.twig', [
+            'question' => $question,
+        ]);
     }
 
     /**
@@ -65,7 +94,9 @@ class QuestionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('question_edit', ['id' => $question->getId()]);
+            return $this->redirectToRoute('question_edit', [
+                'id' => $question->getId()
+            ]);
         }
 
         return $this->render('question/edit.html.twig', [

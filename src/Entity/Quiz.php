@@ -97,4 +97,29 @@ class Quiz
 
         return $this;
     }
+
+    // TODO to test !
+    public function shallowComparison(Quiz $mirrorQuiz): string
+    {
+        $answers = [];
+        $mirrorAnswers = [];
+
+        foreach ($this->getQuestions() as $question) {
+            $answers[] = $question->getAnswers();
+        }
+
+        foreach ($mirrorQuiz->getQuestions() as $mirrorQuestion) {
+            $mirrorAnswers[] = $mirrorQuestion->getAnswers();
+        }
+
+        $counter = \count($answers);
+        $correctFeedback = 0;
+        for ($i = 0; $i < $counter; $i++) {
+            if ($answers[$i] === $mirrorAnswers[$i]) {
+                $correctFeedback++;
+            }
+        }
+
+        return (string)($correctFeedback / $counter);
+    }
 }

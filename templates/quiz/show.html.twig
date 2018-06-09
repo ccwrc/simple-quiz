@@ -7,24 +7,49 @@
 
     <table class="table">
         <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ quiz.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ quiz.title }}</td>
+        </tr>
+        <tr>
+            <th>Percentage correctness to win</th>
+            <td>{{ quiz.percentageCorrectnessToWin }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Questions</h3>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Content</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for question in quiz.questions %}
             <tr>
-                <th>Id</th>
-                <td>{{ quiz.id }}</td>
+                <td>{{ question.id }}</td>
+                <td>{{ question.content }}</td>
             </tr>
+        {% else %}
             <tr>
-                <th>Title</th>
-                <td>{{ quiz.title }}</td>
+                <td colspan="3">no records found</td>
             </tr>
-            <tr>
-                <th>PercentageCorrectnessToWin</th>
-                <td>{{ quiz.percentageCorrectnessToWin }}</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
     <a href="{{ path('quiz_index') }}" class="btn btn-outline-primary">back to list</a>
 
     <a href="{{ path('quiz_edit', {'id': quiz.id}) }}" class="btn btn-outline-primary">edit</a>
+
+    <a href="{{ path('question_new_to_quiz', {'id': quiz.id}) }}" class="btn btn-outline-primary">add question</a>
 
     <br/><br/>
     {{ include('quiz/_delete_form.html.twig') }}
