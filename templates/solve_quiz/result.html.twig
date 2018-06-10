@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz result{% endblock %}
+
+{% block body %}
+    <h1>Quiz result</h1>
+
+    <p> Result: {{ quizPercentageResult }} % ({{ quizResult }}). </p>
+
+    <a href="{{ path('solve_quiz_by_id', {'id': quiz.id}) }}" class="btn btn-outline-primary">back to quiz</a>
+
+    <a href="{{ path('solve_quiz') }}" class="btn btn-outline-primary">back to list</a>
+{% endblock %}

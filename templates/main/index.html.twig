@@ -3,18 +3,23 @@
 {% block title %}Main page{% endblock %}
 
 {% block body %}
-    <h3>options</h3>
+
+    <h1>Options</h1>
 
     <p>
-        <a href="{{ path('quiz_index') }}">quiz (crud)</a>
+        <a href="{{ path('quiz_index') }}" class="btn btn-outline-primary">quiz (crud)</a>
     </p>
 
     <p>
-        <a href="{{ path('question_index') }}">question (crud)</a>
+        <a href="{{ path('question_index') }}" class="btn btn-outline-primary">question (crud)</a>
     </p>
 
     <p>
-        <a href="{{ path('answer_index') }}">answer (crud)</a>
+        <a href="{{ path('answer_index') }}" class="btn btn-outline-primary">answer (crud)</a>
+    </p>
+
+    <p>
+        <a href="{{ path('solve_quiz') }}" class="btn btn-outline-danger">solve the quiz</a>
     </p>
 
 {% endblock %}

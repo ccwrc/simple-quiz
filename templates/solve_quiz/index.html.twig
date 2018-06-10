@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz index{% endblock %}
+
+{% block body %}
+    <h1>Quiz index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Percentage correctness to win</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for quiz in quizzes %}
+            <tr>
+                <td>{{ quiz.title }}</td>
+                <td>{{ quiz.percentageCorrectnessToWin }}</td>
+                <td>
+                    <a href="{{ path('solve_quiz_by_id', {'id': quiz.id}) }}" class="btn btn-outline-secondary btn-sm">solve!</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

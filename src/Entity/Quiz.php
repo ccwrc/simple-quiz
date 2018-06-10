@@ -65,7 +65,6 @@ class Quiz
     {
         if ($this->questions->contains($question)) {
             $this->questions->removeElement($question);
-            // set the owning side to null (unless already changed)
             if ($question->getQuiz() === $this) {
                 $question->setQuiz(null);
             }
@@ -96,30 +95,5 @@ class Quiz
         $this->percentageCorrectnessToWin = $percentageCorrectnessToWin;
 
         return $this;
-    }
-
-    // TODO to test !
-    public function shallowComparison(Quiz $mirrorQuiz): string
-    {
-        $answers = [];
-        $mirrorAnswers = [];
-
-        foreach ($this->getQuestions() as $question) {
-            $answers[] = $question->getAnswers();
-        }
-
-        foreach ($mirrorQuiz->getQuestions() as $mirrorQuestion) {
-            $mirrorAnswers[] = $mirrorQuestion->getAnswers();
-        }
-
-        $counter = \count($answers);
-        $correctFeedback = 0;
-        for ($i = 0; $i < $counter; $i++) {
-            if ($answers[$i] === $mirrorAnswers[$i]) {
-                $correctFeedback++;
-            }
-        }
-
-        return (string)($correctFeedback / $counter);
     }
 }
