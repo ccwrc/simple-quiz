@@ -21,8 +21,7 @@ class QuestionType extends AbstractType
                 'class' => 'App\Entity\Quiz',
                 'choice_label' => 'title',
                 'label' => 'choose quiz: '
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

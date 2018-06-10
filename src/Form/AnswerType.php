@@ -19,8 +19,7 @@ class AnswerType extends AbstractType
                 'class' => 'App\Entity\Question',
                 'choice_label' => 'content',
                 'label' => 'choose question: '
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

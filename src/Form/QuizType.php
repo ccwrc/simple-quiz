@@ -16,8 +16,7 @@ class QuizType extends AbstractType
             ->add('title')
             ->add('percentageCorrectnessToWin', NumberType::class, [
                 'label' => 'Percentage correctness to win'
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

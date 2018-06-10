@@ -33,16 +33,16 @@ class SolveQuizController extends Controller
         $afterAnswers = [];
 
         foreach ($quiz->getQuestions() as $question) {
-            foreach($question->getAnswers() as $answer) {
+            foreach ($question->getAnswers() as $answer) {
                 $beforeAnswers[] = $answer->getIsCorrect();
             }
         }
 
-        $answersCounter = count($beforeAnswers);
+        $answersCounter = \count($beforeAnswers);
         $correctAnswersCounter = 0;
 
         foreach ($quiz->getQuestions() as $question) {
-            foreach($question->getAnswers() as $answer) {
+            foreach ($question->getAnswers() as $answer) {
                 $answer->setIsCorrect(false);
             }
         }
@@ -51,7 +51,7 @@ class SolveQuizController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($form->getData()->getQuestions() as $question) {
-                foreach($question->getAnswers() as $answer) {
+                foreach ($question->getAnswers() as $answer) {
                     $afterAnswers[] = $answer->getIsCorrect();
                 }
             }
@@ -62,7 +62,12 @@ class SolveQuizController extends Controller
                 }
             }
 
-            $quizPercentageResult = (int) ($correctAnswersCounter/$answersCounter * 100);
+            try {
+                $quizPercentageResult = (int)($correctAnswersCounter / $answersCounter * 100);
+            } catch (\Exception $e) {
+                $quizPercentageResult = 0;
+            }
+
             if ($quizPercentageResult >= $quiz->getPercentageCorrectnessToWin()) {
                 $quizResult = 'success';
             } else {

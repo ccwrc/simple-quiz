@@ -15,13 +15,16 @@ class SolveQuestionType extends AbstractType
     {
         $builder
             ->add('content', TextType::class, [
-                'label' => 'content: '
+                'label' => false,
+                'attr' => [
+                    'readonly' => true,
+                    'class' => 'bg-info'
+                ],
             ])
             ->add('answers', CollectionType::class, [
                 'entry_type' => SolveAnswerType::class,
                 'entry_options' => ['label' => false],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
