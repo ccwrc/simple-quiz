@@ -54,7 +54,7 @@ class Quiz
         $this->questions = new ArrayCollection();
     }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }

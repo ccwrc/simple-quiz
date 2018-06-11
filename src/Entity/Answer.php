@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,6 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Answer
 {
+    public function __construct()
+    {
+        $this->isCorrect = false;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -32,7 +39,7 @@ class Answer
      */
     private $question;
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -49,7 +56,7 @@ class Answer
         return $this;
     }
 
-    public function getIsCorrect(): ?bool
+    public function getIsCorrect(): bool
     {
         return $this->isCorrect;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -13,8 +15,6 @@ class MainController extends Controller
      */
     public function index(): Response
     {
-        return $this->render('main/index.html.twig', [
-            //...
-        ]);
+        return $this->render('main/index.html.twig');
     }
 }

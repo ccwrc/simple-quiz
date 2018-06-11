@@ -32,4 +32,17 @@ class QuizTest extends TestCase
 
         $this->assertCount(3, $quiz->getQuestions());
     }
+
+    /**
+     * @depends testCreate
+     */
+    public function testRemoveQuestion(Quiz $quiz): void
+    {
+        $question = $this->createMock(Question::class);
+        $quiz->addQuestion($question);
+        $questionCounter = \count($quiz->getQuestions());
+        $quiz->removeQuestion($question);
+
+        $this->assertCount($questionCounter-1, $quiz->getQuestions());
+    }
 }
