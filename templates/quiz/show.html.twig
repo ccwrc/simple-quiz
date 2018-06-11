@@ -29,6 +29,7 @@
         <tr>
             <th>Id</th>
             <th>Content</th>
+            <th>number of answers</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -37,6 +38,7 @@
             <tr>
                 <td>{{ question.id }}</td>
                 <td>{{ question.content }}</td>
+                <td>{{ question.answers|length }}</td>
                 <td>
                     <a href="{{ path('answer_new_to_question', {'id': question.id}) }}" class="btn btn-outline-secondary btn-sm">add answer</a>
                 </td>

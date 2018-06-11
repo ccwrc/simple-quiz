@@ -19,6 +19,10 @@
             <th>Quiz title</th>
             <td>{{ question.quiz.title }}</td>
         </tr>
+        <tr>
+            <th>Action</th>
+            <td><a href="{{ path('quiz_show', {'id': question.quiz.id}) }}" class="btn btn-outline-secondary btn-sm">back to quiz</a></td>
+        </tr>
         </tbody>
     </table>
 
@@ -30,6 +34,7 @@
             <th>Id</th>
             <th>Content</th>
             <th>Is correct</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +43,7 @@
                 <td>{{ answer.id }}</td>
                 <td>{{ answer.content }}</td>
                 <td>{{ answer.isCorrect ? 'Yes' : 'No' }}</td>
+                <td><a href="{{ path('answer_edit', {'id': answer.id}) }}" class="btn btn-outline-secondary btn-sm">edit</a></td>
             </tr>
         {% else %}
             <tr>
