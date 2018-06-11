@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Quiz;
@@ -10,10 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/solve")
+ */
 class SolveQuizController extends Controller
 {
     /**
-     * @Route("/solve/quiz", name="solve_quiz")
+     * @Route("/quiz", name="solve_quiz")
      */
     public function index(QuizRepository $quizRepository): Response
     {
@@ -25,7 +30,7 @@ class SolveQuizController extends Controller
     /**
      * A real Godzilla function.
      *
-     * @Route("/solve/{id}/quiz", name="solve_quiz_by_id")
+     * @Route("/{id}/quiz", name="solve_quiz_by_id")
      */
     public function solveQuizById(Request $request, Quiz $quiz): Response
     {

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Tests;
+declare(strict_types=1);
+
+namespace App\Tests\Entity;
 
 use App\Entity\Question;
 use App\Entity\Quiz;
@@ -8,16 +10,20 @@ use PHPUnit\Framework\TestCase;
 
 class QuizTest extends TestCase
 {
-    public function testCreate(): void
+    public function testCreate(): Quiz
     {
         $quiz = new Quiz();
 
         $this->assertInstanceOf(Quiz::class, $quiz);
+
+        return $quiz;
     }
 
-    public function testAddQuestionsToQuiz(): void
+    /**
+     * @depends testCreate
+     */
+    public function testAddQuestionsToQuiz(Quiz $quiz): void
     {
-        $quiz = new Quiz();
         $question1 = $this->createMock(Question::class);
         $question2 = $this->createMock(Question::class);
         $question3 = $this->createMock(Question::class);
