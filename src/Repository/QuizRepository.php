@@ -21,6 +21,19 @@ class QuizRepository extends ServiceEntityRepository
         parent::__construct($registry, Quiz::class);
     }
 
+    /**
+     * @param string $title
+     * @return Quiz[]
+     */
+    public function findQuizzesByPartOfTitle(string $title): array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery('SELECT q FROM App\Entity\Quiz q WHERE q.title LIKE :title ORDER BY q.id ASC')
+            ->setParameter("title", "%$title%");
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Quiz[] Returns an array of Quiz objects
 //     */
