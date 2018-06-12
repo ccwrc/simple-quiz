@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnswerRepository")
@@ -24,11 +25,19 @@ class Answer
     private $id;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 250
+     * )
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $content;
 
     /**
+     * @Assert\Type("bool")
+     *
      * @ORM\Column(type="boolean")
      */
     private $isCorrect;
